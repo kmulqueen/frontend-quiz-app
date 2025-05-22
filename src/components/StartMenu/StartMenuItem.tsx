@@ -30,14 +30,11 @@ export default function StartMenuItem({
   }
 
   return (
-    <button
-      className="start-menu-item w-full cursor-pointer"
-      onClick={() => handleStartQuiz(title)}
-    >
-      <div className={`${bgColorClassName} p-2 rounded-lg`}>
+    <button className="option-item" onClick={() => handleStartQuiz(title)}>
+      <div className={`${bgColorClassName} rounded-lg p-2`}>
         <img src={icon} alt={`Icon for ${title} quiz.`} />
       </div>
-      <h2 className="text-blue-900 text-preset-4-mobile">{title}</h2>
+      <h2 className="text-preset-4-mobile text-blue-900">{title}</h2>
     </button>
   );
 }

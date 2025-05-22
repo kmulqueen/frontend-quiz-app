@@ -1,4 +1,4 @@
-import StartMenuItem from "../../components/layout/StartMenuItem";
+import StartMenuItem from "./StartMenuItem";
 
 type StartMenuListProps = {
   subjects: {

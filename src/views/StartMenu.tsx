@@ -1,5 +1,5 @@
 import DATA from "../data.json";
-import StartMenuList from "../components/layout/StartMenuList";
+import StartMenuList from "../components/StartMenu/StartMenuList";
 
 type StartMenuProps = {
   handleStartQuiz: (title: string) => void;
@@ -8,8 +8,8 @@ type StartMenuProps = {
 export default function StartMenu({ handleStartQuiz }: StartMenuProps) {
   return (
     <main className="px-6 py-8">
-      <div className="flex flex-col gap-4 mb-10">
-        <h1 className="text-blue-900 text-preset-2-light-mobile">
+      <div className="mb-10 flex flex-col gap-4">
+        <h1 className="text-preset-2-light-mobile text-blue-900">
           Welcome to the{" "}
           <span className="text-preset-2-medium-mobile">Frontend Quiz!</span>
         </h1>
