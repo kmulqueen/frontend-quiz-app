@@ -2,9 +2,13 @@ import AnswerItem from "./AnswerItem";
 
 type AnswerListProps = {
   options: string[];
+  handleSelectAnswer: (answer: string) => void;
 };
 
-export default function AnswerList({ options }: AnswerListProps) {
+export default function AnswerList({
+  options,
+  handleSelectAnswer,
+}: AnswerListProps) {
   return (
     <ul className="mb-4 flex flex-col gap-4">
       {options.map((option, i) => {
@@ -28,7 +32,7 @@ export default function AnswerList({ options }: AnswerListProps) {
             break;
         }
         return (
-          <li key={option}>
+          <li key={option} onClick={() => handleSelectAnswer(option)}>
             <AnswerItem answerContent={option} answerOption={optionLetter} />
           </li>
         );

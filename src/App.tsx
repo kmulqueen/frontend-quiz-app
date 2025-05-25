@@ -22,6 +22,10 @@ function App() {
     useState<QuestionObject | null>(null);
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState<number>(0);
   const [questionCount, setQuestionCount] = useState<number>(0);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [answerCorrect, setAnswerCorrect] = useState<boolean | null>(null);
+  const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
 
   function handleStartQuiz(title: string) {
     setQuizSection(title);
@@ -32,6 +36,35 @@ function App() {
     setCurrentQuestionNumber(questions[0] ? 1 : 0);
     setQuestionCount(questions.length);
     setCurrentQuestionObject(questions[0] ? questions[0] : null);
+  }
+
+  function handleSelectAnswer(answer: string) {
+    setErrorMessage("");
+    setSelectedAnswer(answer);
+  }
+
+  function handleSubmitAnswer() {
+    if (selectedAnswer === "") {
+      setErrorMessage("Please select an answer");
+    } else if (selectedAnswer !== currentQuestionObject?.answer) {
+      setAnswerCorrect(false);
+    } else if (selectedAnswer === currentQuestionObject.answer) {
+      setAnswerCorrect(true);
+    }
+  }
+
+  function handleNextQuestion() {
+    if (currentQuestionNumber < questionCount) {
+      const nextQuestionNumber = currentQuestionNumber + 1;
+      setCurrentQuestionNumber(nextQuestionNumber);
+      setCurrentQuestionObject(sectionQuestions[nextQuestionNumber - 1]);
+
+      if (nextQuestionNumber === questionCount) {
+        setIsLastQuestion(true);
+      }
+    } else {
+      handleShowResults();
+    }
   }
 
   //TODO: - Call this function on click for last question in quiz.
@@ -66,6 +99,11 @@ function App() {
           question={currentQuestionObject?.question}
           questionNumber={currentQuestionNumber}
           totalQuestions={questionCount}
+          errorMessage={errorMessage}
+          isLastQuestion={isLastQuestion}
+          handleSelectAnswer={handleSelectAnswer}
+          handleSubmitAnswer={handleSubmitAnswer}
+          handleNextQuestion={handleNextQuestion}
         />
       )}
       {showResults && <ResultsPage />}

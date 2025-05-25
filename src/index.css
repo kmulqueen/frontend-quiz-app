@@ -154,6 +154,6 @@
   }
 
   .form-button {
-    @apply flex w-full justify-center rounded-xl bg-purple-600 p-4 text-white;
+    @apply flex w-full cursor-pointer justify-center rounded-xl bg-purple-600 p-4 text-white;
   }
 }
