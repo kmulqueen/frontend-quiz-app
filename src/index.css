@@ -156,4 +156,9 @@
   .form-button {
     @apply flex w-full cursor-pointer justify-center rounded-xl bg-purple-600 p-4 text-white;
   }
+
+  .answer-item {
+    @apply grid grid-cols-[1fr_4fr_1fr] cursor-pointer rounded-[0.75rem] p-4 text-start gap-2 w-full min-h-[4.5rem];
+    background-color: var(--color-white);
+  }
 }

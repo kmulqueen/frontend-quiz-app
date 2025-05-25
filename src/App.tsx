@@ -24,7 +24,8 @@ function App() {
   const [questionCount, setQuestionCount] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-  const [answerCorrect, setAnswerCorrect] = useState<boolean | null>(null);
+  const [answerSubmitted, setAnswerSubmitted] = useState<boolean>(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
 
   function handleStartQuiz(title: string) {
@@ -43,17 +44,24 @@ function App() {
     setSelectedAnswer(answer);
   }
 
-  function handleSubmitAnswer() {
-    if (selectedAnswer === "") {
+  function handleSubmitAnswer(answerToSubmit?: string) {
+    const answerToCheck = answerToSubmit || selectedAnswer;
+
+    if (answerToCheck === "") {
       setErrorMessage("Please select an answer");
-    } else if (selectedAnswer !== currentQuestionObject?.answer) {
-      setAnswerCorrect(false);
-    } else if (selectedAnswer === currentQuestionObject.answer) {
-      setAnswerCorrect(true);
+    } else {
+      setAnswerSubmitted(true);
+      if (answerToCheck !== currentQuestionObject?.answer) {
+        setIsCorrect(false);
+      } else if (answerToCheck === currentQuestionObject.answer) {
+        setIsCorrect(true);
+      }
     }
   }
 
   function handleNextQuestion() {
+    setSelectedAnswer("");
+    setAnswerSubmitted(false);
     if (currentQuestionNumber < questionCount) {
       const nextQuestionNumber = currentQuestionNumber + 1;
       setCurrentQuestionNumber(nextQuestionNumber);
@@ -67,7 +75,6 @@ function App() {
     }
   }
 
-  //TODO: - Call this function on click for last question in quiz.
   function handleShowResults() {
     setQuizInProgress(false);
     setShowResults(true);
@@ -101,6 +108,10 @@ function App() {
           totalQuestions={questionCount}
           errorMessage={errorMessage}
           isLastQuestion={isLastQuestion}
+          isCorrect={isCorrect}
+          selectedAnswer={selectedAnswer}
+          correctAnswer={currentQuestionObject?.answer ?? ""}
+          answerSubmitted={answerSubmitted}
           handleSelectAnswer={handleSelectAnswer}
           handleSubmitAnswer={handleSubmitAnswer}
           handleNextQuestion={handleNextQuestion}
