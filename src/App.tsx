@@ -27,6 +27,7 @@ function App() {
   const [answerSubmitted, setAnswerSubmitted] = useState<boolean>(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isLastQuestion, setIsLastQuestion] = useState<boolean>(false);
+  const [correctCount, setCorrectCount] = useState<number>(0);
 
   function handleStartQuiz(title: string) {
     setQuizSection(title);
@@ -55,6 +56,7 @@ function App() {
         setIsCorrect(false);
       } else if (answerToCheck === currentQuestionObject.answer) {
         setIsCorrect(true);
+        setCorrectCount((prevState) => prevState + 1);
       }
     }
   }
@@ -80,11 +82,19 @@ function App() {
     setShowResults(true);
   }
 
-  //TODO: - Call this function on "Play Again" button click on results page.
   function handleResetQuiz() {
     setQuizInProgress(false);
     setShowResults(false);
     setQuizSection("");
+    setSectionQuestions([]);
+    setCurrentQuestionObject(null);
+    setCurrentQuestionNumber(0);
+    setQuestionCount(0);
+    setSelectedAnswer("");
+    setAnswerSubmitted(false);
+    setIsCorrect(null);
+    setIsLastQuestion(false);
+    setCorrectCount(0);
   }
 
   return (
@@ -117,7 +127,19 @@ function App() {
           handleNextQuestion={handleNextQuestion}
         />
       )}
-      {showResults && <ResultsPage />}
+      {showResults && (
+        <ResultsPage
+          section={quizSection}
+          icon={
+            quizSection !== ""
+              ? `./assets/images/icon-${quizSection.toLowerCase()}.svg`
+              : null
+          }
+          questionCount={questionCount}
+          correctCount={correctCount}
+          handleResetQuiz={handleResetQuiz}
+        />
+      )}
     </>
   );
 }
