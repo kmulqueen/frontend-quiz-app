@@ -13,7 +13,7 @@ export default function StartMenuList({
   handleStartQuiz,
 }: StartMenuListProps) {
   return (
-    <ul className="flex flex-col gap-4">
+    <ul role="list" className="flex flex-col gap-4" aria-label="Quiz subjects">
       {subjects.map((quiz) => (
         <li key={quiz.title}>
           <StartMenuItem

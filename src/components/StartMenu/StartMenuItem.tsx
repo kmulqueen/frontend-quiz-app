@@ -18,7 +18,7 @@ export default function StartMenuItem({
   return (
     <Button className="option-item" onClick={() => handleStartQuiz(title)}>
       <Icon bgColorClassName={bgColorClassName} icon={icon} title={title} />
-      <h2 className="text-preset-4-mobile text-blue-900">{title}</h2>
+      <p className="text-preset-4-mobile text-blue-900">{title}</p>
     </Button>
   );
 }

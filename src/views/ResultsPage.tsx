@@ -18,11 +18,15 @@ export default function ResultsPage({
   handleResetQuiz,
 }: ResultsPageProps) {
   const bgColorClassName: string = iconBgColor(section);
+  const ariaId = `${section}-quiz-results`;
 
   return (
-    <Container as="section" aria-labelledby={`${section}-quiz-results`}>
+    <Container as="section" aria-labelledby={ariaId}>
       <div className="mb-10">
-        <h1 className="text-blue-900 text-preset-2-light-mobile mb-2">
+        <h1
+          className="text-blue-900 text-preset-2-light-mobile mb-2"
+          id={ariaId}
+        >
           Quiz completed
         </h1>
         <h2 className="text-blue-900 text-preset-2-medium-mobile">

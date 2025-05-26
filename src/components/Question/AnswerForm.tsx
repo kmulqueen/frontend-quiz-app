@@ -25,14 +25,16 @@ export default function AnswerForm({
   handleSelectAnswer,
   handleSubmitAnswer,
 }: AnswerFormProps) {
+  const ariaId = `question-${questionNumber}-answers`;
   return (
-    <Container as="fieldset" className="mb-4 flex flex-col gap-4">
-      <legend className="sr-only">
+    <Container as="fieldset" className="mb-4 flex flex-col">
+      <legend className="sr-only" id={ariaId}>
         Select your answer from the following options.
       </legend>
       <div
         role="radiogroup"
-        aria-labelledby={`question-${questionNumber}-answers`}
+        aria-labelledby={ariaId}
+        className="flex flex-col gap-4"
       >
         {options.map((option, i) => {
           const optionLetter: string = String.fromCharCode(65 + i);

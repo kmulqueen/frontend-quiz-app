@@ -108,7 +108,7 @@ function App() {
             : null
         }
       />
-      <Container as="main" className="px-6 py-8">
+      <Container as="main" className="px-6 py-8" id="main-content">
         {quizSection === "" && showResults === false && !quizInProgress && (
           <StartMenu handleStartQuiz={handleStartQuiz} />
         )}

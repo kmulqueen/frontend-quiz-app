@@ -75,7 +75,18 @@ export default function QuestionPage({
           </ButtonWithRef>
         )}
         {errorMessage !== "" && (
-          <ErrorMessage>Please select an answer</ErrorMessage>
+          <>
+            <ErrorMessage>Please select an answer</ErrorMessage>
+            <div aria-live="polite" aria-atomic="true" className="sr-only">
+              {answerSubmitted && isCorrect !== null && (
+                <span>
+                  {isCorrect
+                    ? "Correct answer!"
+                    : `Incorrect. The correct answer was ${correctAnswer}.`}
+                </span>
+              )}
+            </div>
+          </>
         )}
       </div>
     </Container>

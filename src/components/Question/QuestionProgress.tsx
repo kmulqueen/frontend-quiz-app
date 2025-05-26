@@ -24,7 +24,7 @@ export default function QuestionProgress({
         value={questionNumber}
         className="mb-10"
       >
-        {`${questionNumber * totalQuestions}%`}
+        {`${Math.round((questionNumber / totalQuestions) * 100)}%`}
       </progress>
     </>
   );
