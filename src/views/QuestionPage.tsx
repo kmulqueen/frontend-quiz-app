@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Container from "../components/layout/Container";
 import ErrorMessage from "../components/layout/ErrorMessage";
-import AnswerList from "../components/Question/AnswerList";
+import AnswerForm from "../components/Question/AnswerForm";
 import QuestionProgress from "../components/Question/QuestionProgress";
 import Button from "../components/layout/Button";
 import ButtonWithRef from "../components/layout/ButtonWithRef";
@@ -47,10 +47,11 @@ export default function QuestionPage({
           questionNumber={questionNumber}
           totalQuestions={totalQuestions}
         />
-        <AnswerList
+        <AnswerForm
           options={options ?? []}
           handleSelectAnswer={handleSelectAnswer}
           handleSubmitAnswer={handleSubmitAnswer}
+          questionNumber={questionNumber}
           isCorrect={isCorrect}
           selectedAnswer={selectedAnswer}
           correctAnswer={correctAnswer}

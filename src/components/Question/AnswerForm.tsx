@@ -1,9 +1,11 @@
 import { type RefObject } from "react";
 import AnswerItem from "./AnswerItem";
+import Container from "../layout/Container";
 
-type AnswerListProps = {
+type AnswerFormProps = {
   options: string[];
   isCorrect: boolean | null;
+  questionNumber: number;
   selectedAnswer: string;
   correctAnswer: string;
   answerSubmitted: boolean;
@@ -12,44 +14,35 @@ type AnswerListProps = {
   handleSubmitAnswer: (answerToSubmit?: string) => void;
 };
 
-export default function AnswerList({
+export default function AnswerForm({
   options,
   isCorrect,
+  questionNumber,
   selectedAnswer,
   correctAnswer,
   answerSubmitted,
   nextButtonRef,
   handleSelectAnswer,
   handleSubmitAnswer,
-}: AnswerListProps) {
+}: AnswerFormProps) {
   return (
-    <ul className="mb-4 flex flex-col gap-4">
-      {options.map((option, i) => {
-        let optionLetter: string;
-        switch (i) {
-          case 0:
-            optionLetter = "A";
-            break;
-          case 1:
-            optionLetter = "B";
-            break;
-          case 2:
-            optionLetter = "C";
-            break;
-          case 3:
-            optionLetter = "D";
-            break;
-
-          default:
-            optionLetter = "";
-            break;
-        }
-        return (
-          <li key={option}>
+    <Container as="fieldset" className="mb-4 flex flex-col gap-4">
+      <legend className="sr-only">
+        Select your answer from the following options.
+      </legend>
+      <div
+        role="radiogroup"
+        aria-labelledby={`question-${questionNumber}-answers`}
+      >
+        {options.map((option, i) => {
+          const optionLetter: string = String.fromCharCode(65 + i);
+          return (
             <AnswerItem
+              key={option}
               answerContent={option}
               answerOption={optionLetter}
               isCorrect={isCorrect}
+              questionNumber={questionNumber}
               selectedAnswer={selectedAnswer}
               correctAnswer={correctAnswer}
               answerSubmitted={answerSubmitted}
@@ -57,9 +50,9 @@ export default function AnswerList({
               handleSelectAnswer={() => handleSelectAnswer(option)}
               handleSubmitAnswer={handleSubmitAnswer}
             />
-          </li>
-        );
-      })}
-    </ul>
+          );
+        })}
+      </div>
+    </Container>
   );
 }
