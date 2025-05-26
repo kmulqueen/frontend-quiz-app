@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Container from "../components/layout/Container";
 import ErrorMessage from "../components/layout/ErrorMessage";
 import AnswerList from "../components/Question/AnswerList";
 import QuestionProgress from "../components/Question/QuestionProgress";
@@ -39,7 +40,7 @@ export default function QuestionPage({
   const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <>
+    <Container as="section" aria-labelledby={`question-${questionNumber}`}>
       <div className="flex flex-col">
         <QuestionProgress
           question={question}
@@ -76,6 +77,6 @@ export default function QuestionPage({
           <ErrorMessage>Please select an answer</ErrorMessage>
         )}
       </div>
-    </>
+    </Container>
   );
 }

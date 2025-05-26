@@ -1,4 +1,5 @@
 import iconBgColor from "../utils/icon-bgcolor";
+import Container from "../components/layout/Container";
 import Button from "../components/layout/Button";
 
 type ResultsPageProps = {
@@ -19,7 +20,7 @@ export default function ResultsPage({
   const bgColorClassName: string = iconBgColor(section);
 
   return (
-    <>
+    <Container as="section" aria-labelledby={`${section}-quiz-results`}>
       <div className="mb-10">
         <h1 className="text-blue-900 text-preset-2-light-mobile mb-2">
           Quiz completed
@@ -43,6 +44,6 @@ export default function ResultsPage({
       <Button className="form-button" onClick={handleResetQuiz}>
         Play Again
       </Button>
-    </>
+    </Container>
   );
 }

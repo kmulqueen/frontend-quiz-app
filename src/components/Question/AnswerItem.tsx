@@ -50,6 +50,7 @@ export default function AnswerItem({
           }, 0);
         }
       }}
+      disabled={answerSubmitted}
     >
       <AnswerLetter
         isCorrect={isCorrect}

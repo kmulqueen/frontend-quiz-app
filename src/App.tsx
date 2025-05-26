@@ -4,7 +4,7 @@ import QuestionPage from "./views/QuestionPage";
 import ResultsPage from "./views/ResultsPage";
 import Header from "./components/layout/Header";
 import { useState } from "react";
-import MainWrapper from "./components/layout/MainWrapper";
+import Container from "./components/layout/Container";
 
 type QuestionObject = {
   question: string;
@@ -108,7 +108,7 @@ function App() {
             : null
         }
       />
-      <MainWrapper>
+      <Container as="main" className="px-6 py-8">
         {quizSection === "" && showResults === false && !quizInProgress && (
           <StartMenu handleStartQuiz={handleStartQuiz} />
         )}
@@ -142,7 +142,7 @@ function App() {
             handleResetQuiz={handleResetQuiz}
           />
         )}
-      </MainWrapper>
+      </Container>
     </>
   );
 }
