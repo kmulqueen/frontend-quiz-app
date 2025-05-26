@@ -1,3 +1,7 @@
+import iconBgColor from "../../utils/icon-bgcolor";
+import Icon from "../layout/Icon";
+import Button from "../layout/Button";
+
 type StartMenuItemProps = {
   icon: string;
   title: string;
@@ -9,32 +13,12 @@ export default function StartMenuItem({
   title,
   handleStartQuiz,
 }: StartMenuItemProps) {
-  let bgColorClassName: string;
-
-  switch (title) {
-    case "HTML":
-      bgColorClassName = "bg-orange-50";
-      break;
-    case "CSS":
-      bgColorClassName = "bg-green-100";
-      break;
-    case "JavaScript":
-      bgColorClassName = "bg-blue-50";
-      break;
-    case "Accessibility":
-      bgColorClassName = "bg-purple-100";
-      break;
-    default:
-      bgColorClassName = "bg-transparent";
-      break;
-  }
+  const bgColorClassName: string = iconBgColor(title);
 
   return (
-    <button className="option-item" onClick={() => handleStartQuiz(title)}>
-      <div className={`${bgColorClassName} rounded-lg p-2`}>
-        <img src={icon} alt={`Icon for ${title} quiz.`} />
-      </div>
+    <Button className="option-item" onClick={() => handleStartQuiz(title)}>
+      <Icon bgColorClassName={bgColorClassName} icon={icon} title={title} />
       <h2 className="text-preset-4-mobile text-blue-900">{title}</h2>
-    </button>
+    </Button>
   );
 }

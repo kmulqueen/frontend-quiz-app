@@ -2,6 +2,8 @@ import { useRef } from "react";
 import ErrorMessage from "../components/layout/ErrorMessage";
 import AnswerList from "../components/Question/AnswerList";
 import QuestionProgress from "../components/Question/QuestionProgress";
+import Button from "../components/layout/Button";
+import ButtonWithRef from "../components/layout/ButtonWithRef";
 
 type QuestionPageProps = {
   question?: string;
@@ -37,7 +39,7 @@ export default function QuestionPage({
   const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <main className="px-6 py-8">
+    <>
       <div className="flex flex-col">
         <QuestionProgress
           question={question}
@@ -55,28 +57,25 @@ export default function QuestionPage({
           nextButtonRef={nextButtonRef}
         />
         {!answerSubmitted ? (
-          <button
-            className="form-button text-preset-4-mobile mb-4 focus:opacity-50"
-            onClick={() => handleSubmitAnswer()}
-          >
+          <Button className="form-button" onClick={() => handleSubmitAnswer()}>
             Submit Answer
-          </button>
+          </Button>
         ) : (
-          <button
+          <ButtonWithRef
             ref={nextButtonRef}
-            className="form-button text-preset-4-mobile mb-4 focus:opacity-50"
+            className="form-button"
             onClick={(e) => {
               handleNextQuestion();
               (e.target as HTMLButtonElement).blur();
             }}
           >
             {isLastQuestion ? "Show Results" : "Next Question"}
-          </button>
+          </ButtonWithRef>
         )}
         {errorMessage !== "" && (
           <ErrorMessage>Please select an answer</ErrorMessage>
         )}
       </div>
-    </main>
+    </>
   );
 }

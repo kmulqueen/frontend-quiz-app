@@ -4,6 +4,7 @@ import QuestionPage from "./views/QuestionPage";
 import ResultsPage from "./views/ResultsPage";
 import Header from "./components/layout/Header";
 import { useState } from "react";
+import MainWrapper from "./components/layout/MainWrapper";
 
 type QuestionObject = {
   question: string;
@@ -107,39 +108,41 @@ function App() {
             : null
         }
       />
-      {quizSection === "" && showResults === false && !quizInProgress && (
-        <StartMenu handleStartQuiz={handleStartQuiz} />
-      )}
-      {quizInProgress && (
-        <QuestionPage
-          options={currentQuestionObject?.options}
-          question={currentQuestionObject?.question}
-          questionNumber={currentQuestionNumber}
-          totalQuestions={questionCount}
-          errorMessage={errorMessage}
-          isLastQuestion={isLastQuestion}
-          isCorrect={isCorrect}
-          selectedAnswer={selectedAnswer}
-          correctAnswer={currentQuestionObject?.answer ?? ""}
-          answerSubmitted={answerSubmitted}
-          handleSelectAnswer={handleSelectAnswer}
-          handleSubmitAnswer={handleSubmitAnswer}
-          handleNextQuestion={handleNextQuestion}
-        />
-      )}
-      {showResults && (
-        <ResultsPage
-          section={quizSection}
-          icon={
-            quizSection !== ""
-              ? `./assets/images/icon-${quizSection.toLowerCase()}.svg`
-              : null
-          }
-          questionCount={questionCount}
-          correctCount={correctCount}
-          handleResetQuiz={handleResetQuiz}
-        />
-      )}
+      <MainWrapper>
+        {quizSection === "" && showResults === false && !quizInProgress && (
+          <StartMenu handleStartQuiz={handleStartQuiz} />
+        )}
+        {quizInProgress && (
+          <QuestionPage
+            options={currentQuestionObject?.options}
+            question={currentQuestionObject?.question}
+            questionNumber={currentQuestionNumber}
+            totalQuestions={questionCount}
+            errorMessage={errorMessage}
+            isLastQuestion={isLastQuestion}
+            isCorrect={isCorrect}
+            selectedAnswer={selectedAnswer}
+            correctAnswer={currentQuestionObject?.answer ?? ""}
+            answerSubmitted={answerSubmitted}
+            handleSelectAnswer={handleSelectAnswer}
+            handleSubmitAnswer={handleSubmitAnswer}
+            handleNextQuestion={handleNextQuestion}
+          />
+        )}
+        {showResults && (
+          <ResultsPage
+            section={quizSection}
+            icon={
+              quizSection !== ""
+                ? `./assets/images/icon-${quizSection.toLowerCase()}.svg`
+                : null
+            }
+            questionCount={questionCount}
+            correctCount={correctCount}
+            handleResetQuiz={handleResetQuiz}
+          />
+        )}
+      </MainWrapper>
     </>
   );
 }

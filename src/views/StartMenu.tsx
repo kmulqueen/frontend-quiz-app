@@ -7,7 +7,7 @@ type StartMenuProps = {
 
 export default function StartMenu({ handleStartQuiz }: StartMenuProps) {
   return (
-    <main className="px-6 py-8">
+    <>
       <div className="mb-10 flex flex-col gap-4">
         <h1 className="text-preset-2-light-mobile text-blue-900">
           Welcome to the{" "}
@@ -21,6 +21,6 @@ export default function StartMenu({ handleStartQuiz }: StartMenuProps) {
         subjects={DATA.quizzes}
         handleStartQuiz={handleStartQuiz}
       />
-    </main>
+    </>
   );
 }

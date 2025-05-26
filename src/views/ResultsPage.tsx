@@ -1,3 +1,6 @@
+import iconBgColor from "../utils/icon-bgcolor";
+import Button from "../components/layout/Button";
+
 type ResultsPageProps = {
   correctCount: number;
   questionCount: number;
@@ -13,27 +16,10 @@ export default function ResultsPage({
   icon,
   handleResetQuiz,
 }: ResultsPageProps) {
-  let bgColorClassName: string;
+  const bgColorClassName: string = iconBgColor(section);
 
-  switch (section) {
-    case "HTML":
-      bgColorClassName = "bg-orange-50";
-      break;
-    case "CSS":
-      bgColorClassName = "bg-green-100";
-      break;
-    case "JavaScript":
-      bgColorClassName = "bg-blue-50";
-      break;
-    case "Accessibility":
-      bgColorClassName = "bg-purple-100";
-      break;
-    default:
-      bgColorClassName = "bg-transparent";
-      break;
-  }
   return (
-    <main className="px-6 py-8">
+    <>
       <div className="mb-10">
         <h1 className="text-blue-900 text-preset-2-light-mobile mb-2">
           Quiz completed
@@ -54,12 +40,9 @@ export default function ResultsPage({
           out of {questionCount}
         </p>
       </div>
-      <button
-        className="form-button text-preset-4-mobile focus:opacity-50"
-        onClick={handleResetQuiz}
-      >
+      <Button className="form-button" onClick={handleResetQuiz}>
         Play Again
-      </button>
-    </main>
+      </Button>
+    </>
   );
 }
