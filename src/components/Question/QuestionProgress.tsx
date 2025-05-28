@@ -1,30 +1,25 @@
-type QuestionProgressProps = {
-  questionNumber: number;
-  totalQuestions: number;
-  question?: string;
-};
+import { useQuiz } from "../../contexts/useQuiz";
 
-export default function QuestionProgress({
-  questionNumber,
-  totalQuestions,
-  question,
-}: QuestionProgressProps) {
+export default function QuestionProgress() {
+  const { currentQuestion, currentQuestionNumber, totalQuestions } = useQuiz();
   return (
     <>
       <p className="text-preset-5-mobile text-grey-500 mb-4">
-        {`Question ${questionNumber} of ${totalQuestions}`}
+        {`Question ${currentQuestionNumber} of ${totalQuestions}`}
       </p>
-      <p className="text-preset-3-mobile text-blue-900 mb-6">{question}</p>
+      <p className="text-preset-3-mobile text-blue-900 mb-6">
+        {currentQuestion?.question}
+      </p>
       <label htmlFor="quiz-progress" className="sr-only">
         Quiz progress:
       </label>
       <progress
         id="quiz-progress"
         max={totalQuestions}
-        value={questionNumber}
+        value={currentQuestionNumber}
         className="mb-10"
       >
-        {`${Math.round((questionNumber / totalQuestions) * 100)}%`}
+        {`${Math.round((currentQuestionNumber / totalQuestions) * 100)}%`}
       </progress>
     </>
   );

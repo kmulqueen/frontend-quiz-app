@@ -1,33 +1,28 @@
 import { type RefObject } from "react";
-import StatusIcon from "../layout/StatusIcon";
-import AnswerLetter from "../layout/AnswerLetter";
-import Container from "../layout/Container";
+import StatusIcon from "../Layout/StatusIcon";
+import AnswerLetter from "../Layout/AnswerLetter";
+import Container from "../Layout/Container";
+import { useQuiz } from "../../contexts/useQuiz";
 
 type AnswerItemProps = {
   answerOption: string;
   answerContent: string;
-  selectedAnswer: string;
-  correctAnswer: string;
-  questionNumber: number;
-  answerSubmitted: boolean;
-  isCorrect: boolean | null;
   nextButtonRef?: RefObject<HTMLButtonElement | null>;
-  handleSelectAnswer: () => void;
-  handleSubmitAnswer: (answerToSubmit?: string) => void;
 };
 
 export default function AnswerItem({
   answerOption,
   answerContent,
-  selectedAnswer,
-  correctAnswer,
-  questionNumber,
-  answerSubmitted,
-  isCorrect,
   nextButtonRef,
-  handleSelectAnswer,
-  handleSubmitAnswer,
 }: AnswerItemProps) {
+  const {
+    selectedAnswer,
+    currentQuestionNumber,
+    answerSubmitted,
+    isCorrect,
+    selectAnswer,
+    submitAnswer,
+  } = useQuiz();
   const isSelected = selectedAnswer === answerContent;
   let outlineClass = "";
 
@@ -43,7 +38,7 @@ export default function AnswerItem({
     outlineClass = "focus-within:outline-2 focus-within:outline-purple-500";
   }
 
-  const radioId = `question-${questionNumber}-answer-${answerOption}`;
+  const radioId = `question-${currentQuestionNumber}-answer-${answerOption}`;
   return (
     <Container
       as="label"
@@ -52,18 +47,18 @@ export default function AnswerItem({
     >
       <input
         type="radio"
-        name={`question-${questionNumber}`}
+        name={`question-${currentQuestionNumber}`}
         id={radioId}
         value={answerContent}
         checked={selectedAnswer === answerContent}
         className="sr-only"
-        onChange={handleSelectAnswer}
+        onChange={() => selectAnswer(answerContent)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
             e.stopPropagation();
-            handleSelectAnswer();
-            handleSubmitAnswer(answerContent);
+            selectAnswer(answerContent);
+            submitAnswer(answerContent);
             setTimeout(() => {
               nextButtonRef?.current?.focus();
             }, 0);
@@ -71,24 +66,11 @@ export default function AnswerItem({
         }}
         disabled={answerSubmitted}
       />
-      <AnswerLetter
-        isCorrect={isCorrect}
-        isSelected={isSelected}
-        answerSubmitted={answerSubmitted}
-        answerOption={answerOption}
-        answerContent={answerContent}
-        selectedAnswer={selectedAnswer}
-      />
+      <AnswerLetter answerOption={answerOption} answerContent={answerContent} />
       <span className="grow self-center text-preset-4-mobile text-blue-900">
         {answerContent}
       </span>
-      <StatusIcon
-        isCorrect={isCorrect}
-        answerContent={answerContent}
-        answerSubmitted={answerSubmitted}
-        selectedAnswer={selectedAnswer}
-        correctAnswer={correctAnswer}
-      />
+      <StatusIcon answerContent={answerContent} />
     </Container>
   );
 }

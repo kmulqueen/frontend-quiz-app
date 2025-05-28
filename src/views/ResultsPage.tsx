@@ -1,24 +1,15 @@
 import iconBgColor from "../utils/icon-bgcolor";
-import Container from "../components/layout/Container";
-import Button from "../components/layout/Button";
+import { getIcon } from "../utils/get-icon";
+import Container from "../components/Layout/Container";
+import Button from "../components/Layout/Button";
+import { useQuiz } from "../contexts/useQuiz";
 
-type ResultsPageProps = {
-  correctCount: number;
-  questionCount: number;
-  section?: string;
-  icon?: string | null;
-  handleResetQuiz: () => void;
-};
-
-export default function ResultsPage({
-  correctCount,
-  questionCount,
-  section,
-  icon,
-  handleResetQuiz,
-}: ResultsPageProps) {
-  const bgColorClassName: string = iconBgColor(section);
-  const ariaId = `${section}-quiz-results`;
+export default function ResultsPage() {
+  const { correctCount, totalQuestions, selectedSection, resetQuiz } =
+    useQuiz();
+  const icon = getIcon(selectedSection);
+  const bgColorClassName: string = iconBgColor(selectedSection);
+  const ariaId = `${selectedSection}-quiz-results`;
 
   return (
     <Container as="section" aria-labelledby={ariaId}>
@@ -36,16 +27,20 @@ export default function ResultsPage({
       <div className="bg-white rounded-xl p-8 flex flex-col gap-4 items-center mb-4">
         <div className="flex justify-center items-center gap-4">
           <div className={`${bgColorClassName} rounded-lg p-2`}>
-            {icon && <img src={icon} alt={`Icon for ${section} section.`} />}
+            {icon && (
+              <img src={icon} alt={`Icon for ${selectedSection} section.`} />
+            )}
           </div>
-          <h2 className="text-preset-4-mobile text-blue-900">{section}</h2>
+          <h2 className="text-preset-4-mobile text-blue-900">
+            {selectedSection}
+          </h2>
         </div>
         <h3 className="text-preset-1-mobile text-blue-900">{correctCount}</h3>
         <p className="text-preset-4-mobile text-grey-500">
-          out of {questionCount}
+          out of {totalQuestions}
         </p>
       </div>
-      <Button className="form-button" onClick={handleResetQuiz}>
+      <Button className="form-button" onClick={resetQuiz}>
         Play Again
       </Button>
     </Container>

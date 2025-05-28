@@ -1,21 +1,16 @@
 import type { ComponentPropsWithoutRef } from "react";
+import { useQuiz } from "../../contexts/useQuiz";
 
 type AnswerLetterProps = {
-  answerSubmitted: boolean;
-  isCorrect: boolean | null;
-  isSelected: boolean;
   answerContent: string;
-  selectedAnswer: string;
   answerOption: string;
 } & ComponentPropsWithoutRef<"p">;
 
 export default function AnswerLetter({
   answerContent,
-  answerSubmitted,
-  isCorrect,
-  selectedAnswer,
   answerOption,
 }: AnswerLetterProps) {
+  const { answerSubmitted, isCorrect, selectedAnswer } = useQuiz();
   const isSelected = selectedAnswer === answerContent;
 
   const getLetterClasses = () => {

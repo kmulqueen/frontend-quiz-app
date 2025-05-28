@@ -1,24 +1,28 @@
+import DATA from "../../data.json";
 import iconBgColor from "../../utils/icon-bgcolor";
-import Icon from "../layout/Icon";
-import Button from "../layout/Button";
+import Icon from "../Layout/Icon";
+import Button from "../Layout/Button";
+import { getIcon } from "../../utils/get-icon";
+import { useQuiz } from "../../contexts/useQuiz";
 
 type StartMenuItemProps = {
-  icon: string;
-  title: string;
-  handleStartQuiz: (title: string) => void;
+  section: string;
 };
 
-export default function StartMenuItem({
-  icon,
-  title,
-  handleStartQuiz,
-}: StartMenuItemProps) {
-  const bgColorClassName: string = iconBgColor(title);
+export default function StartMenuItem({ section }: StartMenuItemProps) {
+  const { startQuiz } = useQuiz();
+  const bgColorClassName: string = iconBgColor(section);
+  const icon = getIcon(section) || "";
+  const questions =
+    DATA.quizzes.find((quiz) => quiz.title === section)?.questions ?? [];
 
   return (
-    <Button className="option-item" onClick={() => handleStartQuiz(title)}>
-      <Icon bgColorClassName={bgColorClassName} icon={icon} title={title} />
-      <p className="text-preset-4-mobile text-blue-900">{title}</p>
+    <Button
+      className="option-item"
+      onClick={() => startQuiz(section, questions)}
+    >
+      <Icon bgColorClassName={bgColorClassName} icon={icon} title={section} />
+      <p className="text-preset-4-mobile text-blue-900">{section}</p>
     </Button>
   );
 }

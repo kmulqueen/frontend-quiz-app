@@ -1,65 +1,39 @@
 import { useRef } from "react";
-import Container from "../components/layout/Container";
-import ErrorMessage from "../components/layout/ErrorMessage";
+import Container from "../components/Layout/Container";
+import ErrorMessage from "../components/Layout/ErrorMessage";
 import AnswerForm from "../components/Question/AnswerForm";
 import QuestionProgress from "../components/Question/QuestionProgress";
-import Button from "../components/layout/Button";
-import ButtonWithRef from "../components/layout/ButtonWithRef";
+import Button from "../components/Layout/Button";
+import ButtonWithRef from "../components/Layout/ButtonWithRef";
+import { useQuiz } from "../contexts/useQuiz";
 
-type QuestionPageProps = {
-  question?: string;
-  questionNumber: number;
-  totalQuestions: number;
-  options?: string[];
-  errorMessage: string;
-  isLastQuestion: boolean;
-  isCorrect: boolean | null;
-  selectedAnswer: string;
-  correctAnswer: string;
-  answerSubmitted: boolean;
-  handleSelectAnswer: (answer: string) => void;
-  handleSubmitAnswer: (answerToSubmit?: string) => void;
-  handleNextQuestion: () => void;
-};
-
-export default function QuestionPage({
-  question,
-  questionNumber,
-  totalQuestions,
-  options,
-  errorMessage,
-  isLastQuestion,
-  isCorrect,
-  selectedAnswer,
-  correctAnswer,
-  answerSubmitted,
-  handleSelectAnswer,
-  handleSubmitAnswer,
-  handleNextQuestion,
-}: QuestionPageProps) {
+export default function QuestionPage() {
   const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const {
+    currentQuestion,
+    currentQuestionNumber,
+    errorMessage,
+    isLastQuestion,
+    isCorrect,
+    selectedAnswer,
+    answerSubmitted,
+    submitAnswer,
+    nextQuestion,
+  } = useQuiz();
 
   return (
-    <Container as="section" aria-labelledby={`question-${questionNumber}`}>
+    <Container
+      as="section"
+      aria-labelledby={`question-${currentQuestionNumber}`}
+    >
       <div className="flex flex-col">
-        <QuestionProgress
-          question={question}
-          questionNumber={questionNumber}
-          totalQuestions={totalQuestions}
-        />
-        <AnswerForm
-          options={options ?? []}
-          handleSelectAnswer={handleSelectAnswer}
-          handleSubmitAnswer={handleSubmitAnswer}
-          questionNumber={questionNumber}
-          isCorrect={isCorrect}
-          selectedAnswer={selectedAnswer}
-          correctAnswer={correctAnswer}
-          answerSubmitted={answerSubmitted}
-          nextButtonRef={nextButtonRef}
-        />
+        <QuestionProgress />
+        <AnswerForm nextButtonRef={nextButtonRef} />
         {!answerSubmitted ? (
-          <Button className="form-button" onClick={() => handleSubmitAnswer()}>
+          <Button
+            className="form-button"
+            onClick={() => submitAnswer(selectedAnswer)}
+          >
             Submit Answer
           </Button>
         ) : (
@@ -67,7 +41,7 @@ export default function QuestionPage({
             ref={nextButtonRef}
             className="form-button"
             onClick={(e) => {
-              handleNextQuestion();
+              nextQuestion();
               (e.target as HTMLButtonElement).blur();
             }}
           >
@@ -82,7 +56,7 @@ export default function QuestionPage({
                 <span>
                   {isCorrect
                     ? "Correct answer!"
-                    : `Incorrect. The correct answer was ${correctAnswer}.`}
+                    : `Incorrect. The correct answer was ${currentQuestion?.answer}.`}
                 </span>
               )}
             </div>

@@ -1,26 +1,13 @@
+import DATA from "../../data.json";
 import StartMenuItem from "./StartMenuItem";
 
-type StartMenuListProps = {
-  subjects: {
-    icon: string;
-    title: string;
-  }[];
-  handleStartQuiz: (title: string) => void;
-};
-
-export default function StartMenuList({
-  subjects,
-  handleStartQuiz,
-}: StartMenuListProps) {
+export default function StartMenuList() {
+  const subjects = DATA.quizzes;
   return (
     <ul role="list" className="flex flex-col gap-4" aria-label="Quiz subjects">
       {subjects.map((quiz) => (
         <li key={quiz.title}>
-          <StartMenuItem
-            icon={quiz.icon}
-            title={quiz.title}
-            handleStartQuiz={handleStartQuiz}
-          />
+          <StartMenuItem section={quiz.title} />
         </li>
       ))}
     </ul>

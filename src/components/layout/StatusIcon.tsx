@@ -1,18 +1,12 @@
+import { useQuiz } from "../../contexts/useQuiz";
+
 type StatusIconProps = {
-  isCorrect: boolean | null;
   answerContent: string;
-  answerSubmitted: boolean;
-  selectedAnswer: string;
-  correctAnswer: string;
 };
 
-export default function StatusIcon({
-  isCorrect,
-  answerContent,
-  answerSubmitted,
-  selectedAnswer,
-  correctAnswer,
-}: StatusIconProps) {
+export default function StatusIcon({ answerContent }: StatusIconProps) {
+  const { isCorrect, answerSubmitted, selectedAnswer, currentQuestion } =
+    useQuiz();
   return (
     <>
       {isCorrect === false &&
@@ -36,7 +30,7 @@ export default function StatusIcon({
         answerContent === selectedAnswer &&
         answerSubmitted) ||
         (isCorrect === false &&
-          answerContent === correctAnswer &&
+          answerContent === currentQuestion?.answer &&
           answerSubmitted)) && (
         <svg
           xmlns="http://www.w3.org/2000/svg"

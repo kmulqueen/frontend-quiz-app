@@ -1,12 +1,7 @@
-import DATA from "../data.json";
-import Container from "../components/layout/Container";
+import Container from "../components/Layout/Container";
 import StartMenuList from "../components/StartMenu/StartMenuList";
 
-type StartMenuProps = {
-  handleStartQuiz: (title: string) => void;
-};
-
-export default function StartMenu({ handleStartQuiz }: StartMenuProps) {
+export default function StartMenu() {
   return (
     <Container as="section" aria-labelledby="quiz-start-menu">
       <div className="mb-10 flex flex-col gap-4">
@@ -21,10 +16,7 @@ export default function StartMenu({ handleStartQuiz }: StartMenuProps) {
           Pick a subject to get started.
         </p>
       </div>
-      <StartMenuList
-        subjects={DATA.quizzes}
-        handleStartQuiz={handleStartQuiz}
-      />
+      <StartMenuList />
     </Container>
   );
 }

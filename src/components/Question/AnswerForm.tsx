@@ -1,31 +1,15 @@
 import { type RefObject } from "react";
 import AnswerItem from "./AnswerItem";
-import Container from "../layout/Container";
+import Container from "../Layout/Container";
+import { useQuiz } from "../../contexts/useQuiz";
 
 type AnswerFormProps = {
-  options: string[];
-  isCorrect: boolean | null;
-  questionNumber: number;
-  selectedAnswer: string;
-  correctAnswer: string;
-  answerSubmitted: boolean;
   nextButtonRef?: RefObject<HTMLButtonElement | null>;
-  handleSelectAnswer: (answer: string) => void;
-  handleSubmitAnswer: (answerToSubmit?: string) => void;
 };
 
-export default function AnswerForm({
-  options,
-  isCorrect,
-  questionNumber,
-  selectedAnswer,
-  correctAnswer,
-  answerSubmitted,
-  nextButtonRef,
-  handleSelectAnswer,
-  handleSubmitAnswer,
-}: AnswerFormProps) {
-  const ariaId = `question-${questionNumber}-answers`;
+export default function AnswerForm({ nextButtonRef }: AnswerFormProps) {
+  const { currentQuestion, currentQuestionNumber } = useQuiz();
+  const ariaId = `question-${currentQuestionNumber}-answers`;
   return (
     <Container as="fieldset" className="mb-4 flex flex-col">
       <legend className="sr-only" id={ariaId}>
@@ -36,21 +20,14 @@ export default function AnswerForm({
         aria-labelledby={ariaId}
         className="flex flex-col gap-4"
       >
-        {options.map((option, i) => {
+        {currentQuestion?.options.map((option, i) => {
           const optionLetter: string = String.fromCharCode(65 + i);
           return (
             <AnswerItem
               key={option}
               answerContent={option}
               answerOption={optionLetter}
-              isCorrect={isCorrect}
-              questionNumber={questionNumber}
-              selectedAnswer={selectedAnswer}
-              correctAnswer={correctAnswer}
-              answerSubmitted={answerSubmitted}
               nextButtonRef={nextButtonRef}
-              handleSelectAnswer={() => handleSelectAnswer(option)}
-              handleSubmitAnswer={handleSubmitAnswer}
             />
           );
         })}
