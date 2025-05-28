@@ -4,10 +4,10 @@ export default function QuestionProgress() {
   const { currentQuestion, currentQuestionNumber, totalQuestions } = useQuiz();
   return (
     <>
-      <p className="text-preset-5-mobile text-grey-500 mb-4">
+      <p className="mb-4 text-preset-5-mobile text-grey-500 sm:text-preset-6">
         {`Question ${currentQuestionNumber} of ${totalQuestions}`}
       </p>
-      <p className="text-preset-3-mobile text-blue-900 mb-6">
+      <p className="mb-6 text-preset-3-mobile text-blue-900 sm:text-preset-3">
         {currentQuestion?.question}
       </p>
       <label htmlFor="quiz-progress" className="sr-only">

@@ -25,6 +25,7 @@ export default function QuestionPage() {
     <Container
       as="section"
       aria-labelledby={`question-${currentQuestionNumber}`}
+      id="main-content"
     >
       <div className="flex flex-col">
         <QuestionProgress />

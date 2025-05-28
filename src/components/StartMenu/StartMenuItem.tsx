@@ -1,5 +1,5 @@
 import DATA from "../../data.json";
-import iconBgColor from "../../utils/icon-bgcolor";
+import { iconBgColor } from "../../utils/icon-bgcolor";
 import Icon from "../Layout/Icon";
 import Button from "../Layout/Button";
 import { getIcon } from "../../utils/get-icon";

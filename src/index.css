@@ -149,18 +149,62 @@
 
 @layer components {
   .option-item {
-    @apply flex w-full cursor-pointer items-center gap-4 sm:gap-8 rounded-[0.75rem] bg-white p-4 text-start;
-  }
-
-  .form-button {
-    @apply flex w-full cursor-pointer justify-center rounded-xl bg-purple-600 p-4 text-preset-4-mobile text-white focus:opacity-50;
-  }
-
-  .answer-item {
-    @apply grid min-h-[4.5rem] w-full cursor-pointer grid-cols-[1fr_4fr_1fr] gap-2 rounded-[0.75rem] bg-white p-4 text-start focus:outline-2 focus:outline-purple-600 focus-visible:outline-2 focus-visible:outline-purple-600 active:outline-2 active:outline-purple-600;
+    @apply flex w-full cursor-pointer items-center gap-4 rounded-[0.75rem] bg-white p-4 text-start sm:gap-8 sm:rounded-3xl;
   }
 
   .option-shadow {
     @apply shadow-[0_16px_40px_rgba(143,160,193,0.14)];
+  }
+
+  .form-button {
+    @apply flex w-full cursor-pointer justify-center rounded-xl bg-purple-600 p-4 text-preset-4-mobile text-white focus:opacity-50 sm:rounded-3xl sm:p-8 sm:text-preset-4;
+  }
+
+  .answer-item {
+    @apply grid min-h-[4.5rem] w-full cursor-pointer grid-cols-[1fr_4fr_1fr] gap-2  rounded-[0.75rem] bg-white p-4 text-start focus:outline-2 focus:outline-purple-600 focus-visible:outline-2 focus-visible:outline-purple-600 active:outline-2 active:outline-purple-600 sm:rounded-3xl;
+  }
+
+  .answer-letter {
+    @apply h-10 w-10 place-content-center place-self-center rounded-lg p-2 text-center text-preset-4-mobile sm:h-full sm:w-1/2 sm:rounded-xl sm:p-4 sm:text-preset-4;
+  }
+
+  .answer-letter-correct {
+    @apply bg-green-500 text-white;
+  }
+
+  .answer-letter-incorrect {
+    @apply bg-red-500 text-white;
+  }
+
+  .answer-letter-selected {
+    @apply bg-purple-600 text-white;
+  }
+
+  .answer-letter-not-selected {
+    @apply bg-grey-50 text-grey-500;
+  }
+
+  .answer-letter-default {
+    @apply bg-grey-50 text-grey-500 group-focus-within:bg-purple-600 group-focus-within:text-white;
+  }
+
+  .answer-outline-incorrect {
+    @apply outline-2 outline-red-500;
+  }
+
+  .answer-outline-correct {
+    @apply outline-2 outline-green-500;
+  }
+
+  .answer-outline-selected {
+    @apply outline-2 outline-purple-500;
+  }
+
+  .answer-outline-default {
+    @apply focus-within:outline-2 focus-within:outline-purple-500;
+  }
+
+  .answer-content {
+    @apply grow self-center text-preset-4-mobile text-blue-900 sm:text-preset-4;
   }
 }

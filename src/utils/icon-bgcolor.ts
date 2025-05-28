@@ -1,4 +1,4 @@
-export default function iconBgColor(section: string | undefined): string {
+export function iconBgColor(section: string | undefined): string {
   let bgColorClassName: string;
 
   switch (section) {

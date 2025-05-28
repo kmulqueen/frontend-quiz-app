@@ -2,6 +2,7 @@ import { type RefObject } from "react";
 import StatusIcon from "../Layout/StatusIcon";
 import AnswerLetter from "../Layout/AnswerLetter";
 import Container from "../Layout/Container";
+import { getOutlineColor } from "../../utils/get-outline-color";
 import { useQuiz } from "../../contexts/useQuiz";
 
 type AnswerItemProps = {
@@ -24,19 +25,11 @@ export default function AnswerItem({
     submitAnswer,
   } = useQuiz();
   const isSelected = selectedAnswer === answerContent;
-  let outlineClass = "";
-
-  if (answerSubmitted) {
-    if (isCorrect === false && isSelected) {
-      outlineClass = "outline-2 outline-red-500";
-    } else if (isCorrect === true && isSelected) {
-      outlineClass = "outline-2 outline-green-500";
-    }
-  } else if (isSelected) {
-    outlineClass = "outline-2 outline-purple-500";
-  } else {
-    outlineClass = "focus-within:outline-2 focus-within:outline-purple-500";
-  }
+  const outlineClass = getOutlineColor({
+    isCorrect,
+    isSelected,
+    answerSubmitted,
+  });
 
   const radioId = `question-${currentQuestionNumber}-answer-${answerOption}`;
   return (
@@ -67,9 +60,7 @@ export default function AnswerItem({
         disabled={answerSubmitted}
       />
       <AnswerLetter answerOption={answerOption} answerContent={answerContent} />
-      <span className="grow self-center text-preset-4-mobile text-blue-900">
-        {answerContent}
-      </span>
+      <span className="answer-content">{answerContent}</span>
       <StatusIcon answerContent={answerContent} />
     </Container>
   );

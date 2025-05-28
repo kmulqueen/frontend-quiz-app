@@ -1,4 +1,4 @@
-import iconBgColor from "../utils/icon-bgcolor";
+import { iconBgColor } from "../utils/icon-bgcolor";
 import { getIcon } from "../utils/get-icon";
 import Container from "../components/Layout/Container";
 import Button from "../components/Layout/Button";
