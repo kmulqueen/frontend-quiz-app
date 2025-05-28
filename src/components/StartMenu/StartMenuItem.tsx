@@ -18,11 +18,13 @@ export default function StartMenuItem({ section }: StartMenuItemProps) {
 
   return (
     <Button
-      className="option-item"
+      className="option-item option-shadow"
       onClick={() => startQuiz(section, questions)}
     >
       <Icon bgColorClassName={bgColorClassName} icon={icon} title={section} />
-      <p className="text-preset-4-mobile text-blue-900">{section}</p>
+      <p className="text-preset-4-mobile sm:text-preset-4 text-blue-900">
+        {section}
+      </p>
     </Button>
   );
 }

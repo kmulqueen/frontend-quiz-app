@@ -11,7 +11,11 @@ function AppContent() {
   return (
     <>
       <Header />
-      <Container as="main" className="px-6 py-8" id="main-content">
+      <Container
+        as="main"
+        className="px-6 py-8 sm:px-16 sm:py-16"
+        id="main-content"
+      >
         {!isInProgress && !showResults && <StartMenu />}
         {isInProgress && <QuestionPage />}
         {showResults && <ResultsPage />}

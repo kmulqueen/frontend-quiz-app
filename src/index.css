@@ -149,7 +149,7 @@
 
 @layer components {
   .option-item {
-    @apply flex w-full cursor-pointer items-center gap-4 rounded-[0.75rem] bg-white p-4 text-start;
+    @apply flex w-full cursor-pointer items-center gap-4 sm:gap-8 rounded-[0.75rem] bg-white p-4 text-start;
   }
 
   .form-button {
@@ -158,5 +158,9 @@
 
   .answer-item {
     @apply grid min-h-[4.5rem] w-full cursor-pointer grid-cols-[1fr_4fr_1fr] gap-2 rounded-[0.75rem] bg-white p-4 text-start focus:outline-2 focus:outline-purple-600 focus-visible:outline-2 focus-visible:outline-purple-600 active:outline-2 active:outline-purple-600;
+  }
+
+  .option-shadow {
+    @apply shadow-[0_16px_40px_rgba(143,160,193,0.14)];
   }
 }

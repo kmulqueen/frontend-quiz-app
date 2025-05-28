@@ -43,7 +43,7 @@ export default function AnswerItem({
     <Container
       as="label"
       htmlFor={radioId}
-      className={`answer-item group ${outlineClass}`}
+      className={`answer-item option-shadow group ${outlineClass}`}
     >
       <input
         type="radio"
