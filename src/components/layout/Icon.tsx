@@ -1,13 +1,18 @@
+import { useQuiz } from "../../contexts/useQuiz";
+import { getIcon } from "../../utils/get-icon";
+import { iconBgColor } from "../../utils/icon-bgcolor";
+
 type IconProps = {
-  bgColorClassName: string;
-  icon: string;
-  title: string;
+  section: string;
 };
 
-export default function Icon({ bgColorClassName, icon, title }: IconProps) {
+export default function Icon({ section }: IconProps) {
+  const { selectedSection } = useQuiz();
+  const icon = getIcon(section) || getIcon(selectedSection) || "";
+  const bgColorClassName = iconBgColor(section) || iconBgColor(selectedSection);
   return (
     <div className={`rounded-lg ${bgColorClassName} p-2`}>
-      <img src={icon} alt={`Icon for ${title} quiz.`} />
+      <img src={icon} alt={icon !== "" ? `Icon for ${section} quiz.` : ""} />
     </div>
   );
 }
