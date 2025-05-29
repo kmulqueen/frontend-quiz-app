@@ -9,7 +9,11 @@ export default function ResultsPage() {
   const ariaId = `${selectedSection}-quiz-results`;
 
   return (
-    <Container as="section" aria-labelledby={ariaId}>
+    <Container
+      as="section"
+      aria-labelledby={ariaId}
+      className="xl:flex xl:gap-36"
+    >
       <div className="mb-10">
         <h1
           className="text-blue-900 text-preset-2-light-mobile sm:text-preset-2-light mb-2"
@@ -21,18 +25,20 @@ export default function ResultsPage() {
           You scored...
         </h2>
       </div>
-      <div className="results-card">
-        <IconWithSection section={selectedSection} />
-        <h3 className="text-preset-1-mobile sm:text-preset-1 text-blue-900 sm:mt-10">
-          {correctCount}
-        </h3>
-        <p className="text-preset-4-mobile sm:text-preset-5-medium text-grey-500">
-          out of {totalQuestions}
-        </p>
+      <div className="xl:grow">
+        <div className="results-card">
+          <IconWithSection section={selectedSection} />
+          <h3 className="text-preset-1-mobile sm:text-preset-1 text-blue-900 sm:mt-10">
+            {correctCount}
+          </h3>
+          <p className="text-preset-4-mobile sm:text-preset-5-medium text-grey-500">
+            out of {totalQuestions}
+          </p>
+        </div>
+        <Button className="form-button" onClick={resetQuiz}>
+          Play Again
+        </Button>
       </div>
-      <Button className="form-button" onClick={resetQuiz}>
-        Play Again
-      </Button>
     </Container>
   );
 }

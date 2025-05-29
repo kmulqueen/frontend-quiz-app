@@ -13,7 +13,7 @@ function AppContent() {
       <Header />
       <Container
         as="main"
-        className="px-6 py-8 sm:px-16 sm:py-16"
+        className="px-6 py-8 sm:px-16 sm:py-16 xl:px-[8.75rem] xl:py-0"
         id="main-content"
       >
         {!isInProgress && !showResults && <StartMenu />}

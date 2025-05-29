@@ -27,42 +27,46 @@ export default function QuestionPage() {
       aria-labelledby={`question-${currentQuestionNumber}`}
       id="main-content"
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col xl:flex-row xl:gap-32">
         <QuestionProgress />
-        <AnswerForm nextButtonRef={nextButtonRef} />
-        {!answerSubmitted ? (
-          <Button
-            className="form-button"
-            onClick={() => submitAnswer(selectedAnswer)}
-          >
-            Submit Answer
-          </Button>
-        ) : (
-          <ButtonWithRef
-            ref={nextButtonRef}
-            className="form-button"
-            onClick={(e) => {
-              nextQuestion();
-              (e.target as HTMLButtonElement).blur();
-            }}
-          >
-            {isLastQuestion ? "Show Results" : "Next Question"}
-          </ButtonWithRef>
-        )}
-        {errorMessage !== "" && (
+        <div className="xl:min-w-1/2">
+          <AnswerForm nextButtonRef={nextButtonRef} />
           <>
-            <ErrorMessage>Please select an answer</ErrorMessage>
-            <div aria-live="polite" aria-atomic="true" className="sr-only">
-              {answerSubmitted && isCorrect !== null && (
-                <span>
-                  {isCorrect
-                    ? "Correct answer!"
-                    : `Incorrect. The correct answer was ${currentQuestion?.answer}.`}
-                </span>
-              )}
-            </div>
+            {!answerSubmitted ? (
+              <Button
+                className="form-button"
+                onClick={() => submitAnswer(selectedAnswer)}
+              >
+                Submit Answer
+              </Button>
+            ) : (
+              <ButtonWithRef
+                ref={nextButtonRef}
+                className="form-button"
+                onClick={(e) => {
+                  nextQuestion();
+                  (e.target as HTMLButtonElement).blur();
+                }}
+              >
+                {isLastQuestion ? "Show Results" : "Next Question"}
+              </ButtonWithRef>
+            )}
+            {errorMessage !== "" && (
+              <>
+                <ErrorMessage>Please select an answer</ErrorMessage>
+                <div aria-live="polite" aria-atomic="true" className="sr-only">
+                  {answerSubmitted && isCorrect !== null && (
+                    <span>
+                      {isCorrect
+                        ? "Correct answer!"
+                        : `Incorrect. The correct answer was ${currentQuestion?.answer}.`}
+                    </span>
+                  )}
+                </div>
+              </>
+            )}
           </>
-        )}
+        </div>
       </div>
     </Container>
   );

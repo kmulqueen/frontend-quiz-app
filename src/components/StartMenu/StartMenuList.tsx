@@ -6,7 +6,7 @@ export default function StartMenuList() {
   return (
     <ul
       role="list"
-      className="flex flex-col gap-4 sm:gap-6"
+      className="flex flex-col gap-4 sm:gap-6 xl:grow"
       aria-label="Quiz subjects"
     >
       {subjects.map((quiz) => (

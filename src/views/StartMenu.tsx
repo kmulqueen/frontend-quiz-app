@@ -3,8 +3,12 @@ import StartMenuList from "../components/StartMenu/StartMenuList";
 
 export default function StartMenu() {
   return (
-    <Container as="section" aria-labelledby="quiz-start-menu">
-      <div className="mb-10 sm:mb-16 flex flex-col gap-4">
+    <Container
+      as="section"
+      aria-labelledby="quiz-start-menu"
+      className="xl:flex xl:gap-32"
+    >
+      <div className="mb-10 sm:mb-16 flex flex-col gap-4 xl:gap-12">
         <h1
           className="text-preset-2-light-mobile sm:text-preset-2-light text-blue-900"
           id="quiz-start-menu"

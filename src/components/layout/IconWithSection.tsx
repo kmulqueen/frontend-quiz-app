@@ -9,7 +9,7 @@ type IconWithSectionProps = {
 export default function IconWithSection({ section }: IconWithSectionProps) {
   const { selectedSection } = useQuiz();
   return (
-    <Container className="flex items-center gap-4 sm:gap-6">
+    <Container className="flex items-center gap-4 sm:gap-6 xl:gap-8">
       <Icon section={selectedSection || section} />
       <p className="text-preset-4-mobile sm:text-preset-4 text-blue-900">
         {selectedSection || section}
