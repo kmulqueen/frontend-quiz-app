@@ -1,4 +1,4 @@
-import { useReducer, type PropsWithChildren } from "react";
+import { useReducer, useEffect, type PropsWithChildren } from "react";
 import type {
   ThemeState,
   ThemeContextValue,
@@ -28,6 +28,16 @@ function themeReducer(state: ThemeState, action: ThemeAction): ThemeState {
 
 export function ThemeProvider({ children }: PropsWithChildren) {
   const [themeState, dispatch] = useReducer(themeReducer, initialState);
+
+  useEffect(() => {
+    if (themeState.isDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("quiz-app-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("quiz-app-theme", "light");
+    }
+  }, [themeState.isDarkMode]);
 
   const ctx: ThemeContextValue = {
     ...themeState,

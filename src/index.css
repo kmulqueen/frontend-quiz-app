@@ -19,6 +19,7 @@
   html {
     font-family: "Rubik", sans-serif;
     background-color: var(--color-grey-50);
+    min-height: 100vh;
     @apply bg-[url(../public/assets/images/pattern-background-mobile-light.svg)] bg-cover bg-no-repeat sm:bg-[url(../public/assets/images/pattern-background-tablet-light.svg)] xl:bg-[url(../public/assets/images/pattern-background-desktop-light.svg)] dark:bg-blue-900 dark:bg-[url(../public/assets/images/pattern-background-mobile-dark.svg)] dark:sm:bg-[url(../public/assets/images/pattern-background-tablet-dark.svg)] dark:xl:bg-[url(../public/assets/images/pattern-background-desktop-dark.svg)];
   }
 

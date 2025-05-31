@@ -16,6 +16,7 @@ export default function DarkModeToggle() {
       {isDarkMode ? <SunLight /> : <SunDark />}
 
       <label className="switch">
+        <span className="sr-only">Dark mode toggle</span>
         <input
           type="checkbox"
           name="dark-mode-toggle"
