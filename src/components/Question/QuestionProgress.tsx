@@ -11,10 +11,10 @@ export default function QuestionProgress() {
   const progressBarPosition = errorMessage ? "xl:mb-[11.75rem]" : "xl:mb-30";
   return (
     <Container className="flex flex-col">
-      <p className="mb-4 xl:mb-6 text-preset-5-mobile text-grey-500 sm:text-preset-6">
+      <p className="mb-4 text-preset-5-mobile text-grey-500 sm:text-preset-6 xl:mb-6 dark:text-blue-300">
         {`Question ${currentQuestionNumber} of ${totalQuestions}`}
       </p>
-      <p className="mb-6 text-preset-3-mobile text-blue-900 sm:text-preset-3">
+      <p className="mb-6 text-preset-3-mobile text-blue-900 sm:text-preset-3 dark:text-white">
         {currentQuestion?.question}
       </p>
       <label htmlFor="quiz-progress" className="sr-only">

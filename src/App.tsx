@@ -1,11 +1,14 @@
 import { QuizProvider } from "./contexts/QuizProvider";
+import { ThemeProvider } from "./contexts/ThemeProvider";
 import AppContent from "./components/App/AppContent";
 
 function App() {
   return (
-    <QuizProvider>
-      <AppContent />
-    </QuizProvider>
+    <ThemeProvider>
+      <QuizProvider>
+        <AppContent />
+      </QuizProvider>
+    </ThemeProvider>
   );
 }
 

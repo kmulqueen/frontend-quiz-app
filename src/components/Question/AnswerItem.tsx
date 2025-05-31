@@ -60,7 +60,9 @@ export default function AnswerItem({
         disabled={answerSubmitted}
       />
       <AnswerLetter answerOption={answerOption} answerContent={answerContent} />
-      <span className="answer-content">{answerContent}</span>
+      <span className="answer-content text-blue-900 dark:text-white">
+        {answerContent}
+      </span>
       <StatusIcon answerContent={answerContent} />
     </Container>
   );

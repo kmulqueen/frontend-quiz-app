@@ -10,7 +10,7 @@ export default function StartMenu() {
     >
       <div className="mb-10 sm:mb-16 flex flex-col gap-4 xl:gap-12">
         <h1
-          className="text-preset-2-light-mobile sm:text-preset-2-light text-blue-900"
+          className="text-preset-2-light-mobile sm:text-preset-2-light text-blue-900 dark:text-white"
           id="quiz-start-menu"
         >
           Welcome to the
@@ -19,7 +19,7 @@ export default function StartMenu() {
             Frontend Quiz!
           </span>
         </h1>
-        <p className="text-preset-5-mobile sm:text-preset-6 text-grey-500">
+        <p className="text-preset-5-mobile sm:text-preset-6 text-grey-500 dark:text-blue-300">
           Pick a subject to get started.
         </p>
       </div>
