@@ -7,6 +7,5 @@ export type ThemeContextValue = ThemeState & {
 };
 
 type ToggleThemeAction = { type: "TOGGLE_THEME" };
-type InitializeThemeAction = { type: "INITIALIZE_THEME"; payload: boolean };
 
-export type ThemeAction = ToggleThemeAction | InitializeThemeAction;
+export type ThemeAction = ToggleThemeAction;

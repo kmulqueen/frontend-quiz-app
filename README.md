@@ -38,71 +38,91 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
+**Start menu (mobile)**
+![Kyle Mulqueen's mobile solution start menu light mode](./public/assets/images/kyle-solution-mobile-light.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [GitHub Pages link](https://kmulqueen.github.io/frontend-quiz-app/)
 
 ## My process
 
 ### Built with
 
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/) - JS library
+- [Vite](https://vite.dev/) - Frontend build tool
+- [Tailwind CSS](https://tailwindcss.com/) - For styles
+- Mobile-first workflow
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
 - CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+
+**Screenshot: Results page in dark mode (desktop)**
+![Kyle Mulqueen's desktop solution results page in dark mode](./public/assets/images/kyle-solution-desktop-results.png)
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+**Context API with useReducer:** I had to refactor all of my code because I had too many useState variables. This caused a mess of prop-drilling and was a giant pain to refactor. Moving from 15+ useState variables to a centralized state management system dramatically improved code organization. Using useReducer instead of useState made state updates predictable and easier to debug:
 
-To see how you can add code snippets, see below:
+```tsx
+// Before: Multiple scattered state updates
+setSelectedAnswer(answer);
+setAnswerSubmitted(true);
+setIsCorrect(answer === correctAnswer);
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+// After: Single action with predictable state changes
+dispatch({ type: "SUBMIT_ANSWER", payload: answer });
 ```
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
+**Accessibility-First Development:** This project taught me the critical importance of semantic HTML and proper form accessibility. I initially implemented quiz answers as buttons, but learned that radio buttons with proper `<fieldset>`, `<legend>`, and `<label>` elements are essential for screen readers and keyboard navigation. The key insight was that you can hide radio buttons with `sr-only` while maintaining full accessibility:
+
+```tsx
+<input
+  type="radio"
+  className="sr-only"
+  checked={isSelected}
+  onChange={handleSelectAnswer}
+/>
+<label htmlFor={radioId}>
+  {/* Custom styled content */}
+</label>
 ```
 
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
+**Polymorphic Components:** Building a flexible Container component that can render as any HTML element while maintaining TypeScript safety was a game-changer for semantic HTML:
+
+```tsx
+<Container as="section" aria-labelledby="quiz-section">
+<Container as="fieldset" className="quiz-form">
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+**Screenshot: Question page with feedback (mobile)**
+![Kyle Mulqueen's mobile solution question page with feedback in light mode](./public/assets/images/kyle-solution-mobile-wrong-answer.png)
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+**Advanced Accessibility Patterns:** While I implemented basic accessibility, I want to explore more complex ARIA patterns, focus management strategies, and automated accessibility testing tools like axe-core.
+
+**State Management Architecture:** I successfully used Context API for this project, but I want to compare it with other solutions like Zustand or Redux Toolkit to understand when each approach is most appropriate.
+
+**CSS Architecture:** I mixed Tailwind utilities with custom CSS for responsive background images and dark mode. I want to develop a more systematic approach to handling complex responsive designs and theming patterns.
+
+**Testing Strategy:** This project focused on implementation, but I need to develop skills in testing accessibility features, Context providers, and user interactions with tools like Jest and React Testing Library.
+
+**Performance Optimization:** I want to learn about memoization patterns, code splitting, and performance monitoring to ensure smooth user experiences as applications grow in complexity.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) - Essential reference for web accessibility standards. The quick reference format made it easy to check specific requirements for form controls and navigation.
+- [MDN ARIA Best Practices](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques) - Helped me understand when and how to use ARIA attributes correctly, especially for form groups and live regions.
+- [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs) - The dark mode and responsive design sections were crucial for implementing theme switching with proper media queries.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [Kyle Mulqueen's GitHub](https://github.com/kmulqueen)
+- Frontend Mentor - [@kmulqueen](https://www.frontendmentor.io/profile/kmulqueen)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+[Academind's Udemy course: "React & TypeScript - The Practical Guide"](https://www.udemy.com/course/react-typescript-the-practical-guide). This was essential for my understanding of using Context API and also building the Polymorphic Container component. It was a pretty quick course and I learned a lot about using React with TypeScript. Would highly recommend.
